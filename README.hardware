@@ -1,0 +1,83 @@
+		AMD x86 BSP
+
+Table of Contents
+=================
+
+1. Supported Boards
+2. Change History
+3. BSP Notes
+
+1. Supported Boards
+===================
+
+This BSP supports the following boards:
+
+  + AMD EPYC Embedded 3000 Series Snowy Owl platform
+
+2. Change History
+=================
+  - 2022/10 (LINUXPG-1154) Add AMD Snowy Owl support (only 64-bit).
+
+3. BSP Notes
+===============
+
+3.1 AMD Snowy Owl
+-----------------
+
+The AMD Snowy Owl is AMD EPYC 3000 series product, featuring DDR4 DIMMs,
+up to 8 10GbE Ethernet controller.
+
+3.1.1 Validated Board Info
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+[Board info]
+	Vendor: AMD Corporation
+	Platform: AMD Wallaby
+
+[BIOS info]
+	Vendor: American Megatrends Inc.
+	Version: WWB7713N
+	Release Date: 07/11/2017
+
+[SoC info]
+	Processor: AMD Eng Sample: ZE3251BGR88AF_31/21_Y(AMD EPYC 3000 Series Snowy Owl)
+	Microcode: 0x8001206
+	Stepping: 2
+	CPU family: 23
+
+3.1.2 Supported Features
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following BSP features are validated and supported on boards where
+the corresponding h/w features exist.
+
+	o Bus
+		+ PCI/PCI-Express Gen3
+		+ I2C/SMBus:
+			+ AMD FCH SMBus Controller [1022:790b] (rev 59)
+
+	o Network
+		+ AMD Family 17h Processor 10 Gb Ethernet Controller [1022:1458]
+
+	o USB
+		+ AMD Zeppelin USB 3.0 Host controller [1022:145f]
+
+	o Storage
+		+ SATA: AMD FCH SATA Controller [AHCI mode] [1022:7901] (rev 51)
+
+	o Multimedia
+		+ Audio:
+			+ AMD Family 17h (Models 00h-0fh) HD Audio Controller [1022:1457]
+			+ AMD/ATI Oland/Hainan/Cape Verde/Pitcairn HDMI Audio [Radeon HD 7000 Series] [1002:aab0]
+		+ Graphics:
+			+ AMD/ATI Oland GL [FirePro W2100] [1002:6608]
+
+	o Power Management
+		+ Standby: BIOS needs to support ACPI S1
+		+ CPU Idle: BIOS needs to support ACPI C-state
+
+	o Misc Devices
+		+ GPIO
+		+ RTC: PC-style CMOS RTC
+		+ Input device
+			+ USB mouse & keyboard
