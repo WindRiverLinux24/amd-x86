@@ -10,6 +10,6 @@ DEPENDS:append:amd-x86 = " cdrtools-native"
 # A method to install/update for bzImage on a deployed target
 KERNELLOADEREXTENSION:append:amd-x86 = " kernel-grub"
 
-TARGET_SUPPORTED_KTYPES:amd-x86 = "standard preempt-rt"
+TARGET_SUPPORTED_KTYPES:amd-x86 = "standard"
 
 KMACHINE:amd-snowyowl-64 = "amd-x86-64"
