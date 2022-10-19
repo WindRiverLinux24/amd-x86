@@ -88,3 +88,11 @@ The following feature is not supported or validated.
 
 	x ACPI S3
 	x AMD Family 17h (Models 00h-0fh) HD Audio Controller [1022:1457]
+
+3.1.4 Note
+~~~~~~~~~~
+
+The serial port console can be used on board is ttyS4 or ttyS5.
+
+  AMDI0020:00: ttyS4 at MMIO 0xfedc9000 (irq = 3, base_baud = 3000000) is a 16550A
+  AMDI0020:01: ttyS5 at MMIO 0xfedca000 (irq = 4, base_baud = 3000000) is a 16550A
