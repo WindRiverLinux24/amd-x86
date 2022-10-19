@@ -67,7 +67,6 @@ the corresponding h/w features exist.
 
 	o Multimedia
 		+ Audio:
-			+ AMD Family 17h (Models 00h-0fh) HD Audio Controller [1022:1457]
 			+ AMD/ATI Oland/Hainan/Cape Verde/Pitcairn HDMI Audio [Radeon HD 7000 Series] [1002:aab0]
 		+ Graphics:
 			+ AMD/ATI Oland GL [FirePro W2100] [1002:6608]
@@ -82,8 +81,10 @@ the corresponding h/w features exist.
 		+ Input device
 			+ USB mouse & keyboard
 
-3.1.3 Unsupported Feature
-~~~~~~~~~~~~~~~~~~~~~~~~~
+3.1.3 Unsupported Features
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 The following feature is not supported or validated.
 
 	x ACPI S3
+	x AMD Family 17h (Models 00h-0fh) HD Audio Controller [1022:1457]
