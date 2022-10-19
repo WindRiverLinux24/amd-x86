@@ -96,3 +96,31 @@ The serial port console can be used on board is ttyS4 or ttyS5.
 
   AMDI0020:00: ttyS4 at MMIO 0xfedc9000 (irq = 3, base_baud = 3000000) is a 16550A
   AMDI0020:01: ttyS5 at MMIO 0xfedca000 (irq = 4, base_baud = 3000000) is a 16550A
+
+3.1.5 Known Issue
+~~~~~~~~~~~~~~~~~
+
+You may see the following unexpected call trace.
+
+  Call Trace:
+   <TASK>
+   ttm_bo_release+0x218/0x350 [ttm]
+   ttm_bo_put+0x34/0x50 [ttm]
+   radeon_bo_unref+0x1e/0x30 [radeon]
+   radeon_gem_object_free+0x34/0x50 [radeon]
+   drm_gem_object_free+0x1d/0x30
+   drm_gem_dmabuf_release+0x44/0x70
+   dma_buf_release+0x46/0xa0
+   __dentry_kill+0x10c/0x190
+   dput+0x1c2/0x320
+   __fput+0xe8/0x260
+   ____fput+0xe/0x20
+   task_work_run+0x64/0xa0
+   exit_to_user_mode_prepare+0x15b/0x160
+   syscall_exit_to_user_mode+0x21/0x50
+   do_syscall_64+0x50/0x90
+   entry_SYSCALL_64_after_hwframe+0x61/0xcb
+
+It is related to AMD FirePro W2100 GPU card and Linux radeon driver. The call trace is
+shown when system/screen is back from sleep or display resolution is changed. No affected
+functionality is observed. This issue is under investigation.
