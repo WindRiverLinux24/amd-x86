@@ -73,11 +73,17 @@ the corresponding h/w features exist.
 			+ AMD/ATI Oland GL [FirePro W2100] [1002:6608]
 
 	o Power Management
-		+ Standby: BIOS needs to support ACPI S1
-		+ CPU Idle: BIOS needs to support ACPI C-state
+		+ ACPI S1
+		+ ACPI S5
 
 	o Misc Devices
 		+ GPIO
 		+ RTC: PC-style CMOS RTC
 		+ Input device
 			+ USB mouse & keyboard
+
+3.1.3 Unsupported Feature
+~~~~~~~~~~~~~~~~~~~~~~~~~
+The following feature is not supported or validated.
+
+	x ACPI S3
