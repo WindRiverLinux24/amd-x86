@@ -15,9 +15,7 @@ TUNE_FEATURES:tune-dbfp5 = "dbfp5"
 BASE_LIB:tune-dbfp5 = "lib64"
 TUNE_PKGARCH:tune-dbfp5 = "dbfp5"
 PACKAGE_EXTRA_ARCHS:tune-dbfp5 = "${TUNE_PKGARCH:tune-dbfp5}"
-
-# Disable QEMU usermode by default (get avx2)
-MACHINE_FEATURES:remove = "qemu-usermode"
+QEMU_EXTRAOPTIONS_dbfp5 = " -cpu EPYC-v3,check=false"
 
 # If qemu-usermode is enabled, we have to disable avx2 ISA extensions, but we can keep mtune as znver1 as generic
 # Reference: https://git.yoctoproject.org/meta-intel/commit/?id=0bc64c2ad39fbf2bcd4673c817f5f52a5b9be4be
