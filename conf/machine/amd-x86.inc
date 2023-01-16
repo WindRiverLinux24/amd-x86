@@ -6,7 +6,7 @@ MACHINEOVERRIDES:prepend = "amd-x86:"
 
 MACHINE_FEATURES += "x86 pci usbhost ext2 keyboard screen alsa acpi vfat serial"
 MACHINE_FEATURES += "efi pcbios"
-MACHINE_EXTRA_RRECOMMENDS += "linux-firmware-radeon"
+MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "linux-firmware-radeon"
 
 EFI_PROVIDER ?= "${@bb.utils.contains('INCOMPATIBLE_LICENSE', 'GPL-3.0-only', 'systemd-boot', 'grub-efi', d)}"
 
