@@ -47,7 +47,7 @@ PREFERRED_PROVIDER_libglu = "libglu"
 PREFERRED_PROVIDER_libdrm = "libdrm"
 
 PREFERRED_PROVIDER_virtual/kernel ??= "linux-yocto"
-PREFERRED_VERSION_linux-yocto ?= "5.15%"
+PREFERRED_VERSION_linux-yocto ?= "6.1%"
 
 IMAGE_FSTYPES += "wic wic.bmap live"
 WKS_FILE ?= "${@bb.utils.contains('INCOMPATIBLE_LICENSE', 'GPLv3', 'systemd-bootdisk.wks', 'mkefidisk.wks', d)}"
