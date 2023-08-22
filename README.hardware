@@ -72,7 +72,7 @@ the corresponding h/w features exist.
 			+ AMD/ATI Oland GL [FirePro W2100] [1002:6608]
 
 	o Power Management
-		+ ACPI S1
+		+ ACPI S0 (Suspend to Idle)
 		+ ACPI S5
 
 	o Misc Devices
@@ -86,7 +86,7 @@ the corresponding h/w features exist.
 
 The following feature is not supported or validated.
 
-	x ACPI S3
+	x ACPI S3 (Suspend to RAM)
 	x AMD Family 17h (Models 00h-0fh) HD Audio Controller [1022:1457]
 
 3.1.4 Note
