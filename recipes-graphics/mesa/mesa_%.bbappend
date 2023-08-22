@@ -6,7 +6,7 @@ GALLIUMDRIVERS_LLVM:append:amd-x86 = ",radeonsi"
 do_generate_llvmlib_link:class-target:amd-x86 () {
     if [ "${nonarch_libdir}" != "${libdir}" ] ; then
         cd ${RECIPE_SYSROOT}${nonarch_libdir}
-        ln -s ../${baselib}/libLLVM* ./
+        ln -sf ../${baselib}/libLLVM* ./
     fi
 }
 
