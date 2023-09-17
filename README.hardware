@@ -97,10 +97,10 @@ The serial port console can be used on board is ttyS4 or ttyS5.
   AMDI0020:00: ttyS4 at MMIO 0xfedc9000 (irq = 3, base_baud = 3000000) is a 16550A
   AMDI0020:01: ttyS5 at MMIO 0xfedca000 (irq = 4, base_baud = 3000000) is a 16550A
 
-3.1.5 Known Issue
-~~~~~~~~~~~~~~~~~
+3.1.5 Known Issues
+~~~~~~~~~~~~~~~~~~
 
-You may see the following unexpected call trace.
+1) You may see the following unexpected call trace.
 
   Call Trace:
    <TASK>
@@ -124,3 +124,19 @@ You may see the following unexpected call trace.
 It is related to AMD FirePro W2100 GPU card and Linux radeon driver. The call trace is
 shown when system/screen is back from sleep or display resolution is changed. No affected
 functionality is observed. This issue is under investigation.
+
+2) "nproc --all" may show incorrect number of CPU on the board.
+
+According to ACPI MADT of the board, the total supported CPU number is 128. The supported
+CPU number in Linux is limited to 64, due to CONFIG_NR_CPUS=64 in kernel config.
+That's why you can see "smpboot: 128 Processors exceeds NR_CPUS limit of 64" in kernel boot log.
+And the number reported by /sys/devices/system/cpu/possible is 64, due to the same reason.
+
+In LTS23, "nproc --all" gets the CPU number from "/sys/devices/system/cpu/possible".
+This number may not be the actual number of CPU installed on the board. It is just the number
+reported by ACPI MDAT table.
+
+So "nproc --all" and "nproc" may show different number due to buggy BIOS/firmware.
+If you want to avoid this issue, you can use "nr_cpus=n" in kernel boot parameters to limit
+the supported CPU number in kernel. For example, if you have 16 CPUs installed on board, you can
+set nr_cpus=16, then "nproc --all" and "nproc" will both return 16.
