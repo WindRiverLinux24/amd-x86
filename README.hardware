@@ -140,3 +140,16 @@ So "nproc --all" and "nproc" may show different number due to buggy BIOS/firmwar
 If you want to avoid this issue, you can use "nr_cpus=n" in kernel boot parameters to limit
 the supported CPU number in kernel. For example, if you have 16 CPUs installed on board, you can
 set nr_cpus=16, then "nproc --all" and "nproc" will both return 16.
+
+3) Speculative Return Stack Overflow (SRSO)
+You may see the following messages from kernel boot log.
+
+  Speculative Return Stack Overflow: IBPB-extending microcode not applied!
+  Speculative Return Stack Overflow: Mitigation: safe RET, no microcode
+
+It means the mitigation for SRSO is software-only. It only addresses User->Kernel and Guest->Host
+transitions protection. If you need microcode mitigation, please contact you CPU/BIOS vendor.
+
+For more information, please refer to:
+  https://kernel.org/doc/html/latest/admin-guide/hw-vuln/srso.html
+  https://www.amd.com/en/resources/product-security/bulletin/amd-sb-7005.html
