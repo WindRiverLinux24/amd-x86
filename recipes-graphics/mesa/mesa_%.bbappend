@@ -1,4 +1,4 @@
-PACKAGECONFIG:append:amd-x86 = " gallium-llvm"
+PACKAGECONFIG:append:class-target:amd-x86 = " gallium-llvm"
 GALLIUMDRIVERS_LLVM:append:amd-x86 = ",radeonsi"
 
 # We might need links to some libraries.
