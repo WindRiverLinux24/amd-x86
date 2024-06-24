@@ -7,7 +7,7 @@ require conf/machine/include/x86/x86-base.inc
 TUNEVALID[dbfp5] = "Enable AMD DB-FP5 (64 bit) specific processor optimizations"
 TUNECONFLICTS[dbfp5] = "m32 mx32"
 TUNE_ARCH .= "${@bb.utils.contains("TUNE_FEATURES", "dbfp5", "${X86ARCH64}", "" ,d)}"
-TUNE_CCARGS .= "${@bb.utils.contains("TUNE_FEATURES", "dbfp5", " -march=znver1 ${DBFP5_TUNE} -mno-bmi", "", d)}"
+TUNE_CCARGS .= "${@bb.utils.contains("TUNE_FEATURES", "dbfp5", " -march=znver1 ${DBFP5_TUNE}", "", d)}"
 
 # Extra tune selections
 AVAILTUNES += "dbfp5"
@@ -22,6 +22,7 @@ QEMU_EXTRAOPTIONS_dbfp5 = " -cpu EPYC-v3,check=false"
 DBFP5_TUNE .= "${@bb.utils.contains('MACHINE_FEATURES', 'qemu-usermode', ' -mtune=znver1 ${QEMU_UNAVAILABLE_ISA}', '', d)}"
 
 QEMU_UNAVAILABLE_ISA = " \
+-mno-bmi \
 -mno-avx \
 -mno-avx2 \
 -mno-avx512f \
