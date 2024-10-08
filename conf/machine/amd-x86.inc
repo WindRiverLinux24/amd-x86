@@ -20,9 +20,6 @@ LABELS_LIVE:remove = "${@bb.utils.contains('INCOMPATIBLE_LICENSE', 'GPL-3.0-only
 
 KERNEL_IMAGETYPE = "bzImage"
 
-SERIAL_CONSOLES = "115200;ttyS0"
-
-
 XSERVER ?= "xserver-xorg \
            xserver-xorg-extension-dri \
            xserver-xorg-extension-dri2 \
