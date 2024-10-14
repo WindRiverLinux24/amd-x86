@@ -104,30 +104,48 @@ in kernel boot cmdline.
 3.1.5 Known Issues
 ~~~~~~~~~~~~~~~~~~
 
-1) You may see the following unexpected call trace.
+1) ACPI S0 (suspend-to-idle) doesn't work with AMD/ATI Oland GL (FirePro W2100) GPU card on the bord.
 
-  Call Trace:
-   <TASK>
-   ttm_bo_release+0x218/0x350 [ttm]
-   ttm_bo_put+0x34/0x50 [ttm]
-   radeon_bo_unref+0x1e/0x30 [radeon]
-   radeon_gem_object_free+0x34/0x50 [radeon]
-   drm_gem_object_free+0x1d/0x30
-   drm_gem_dmabuf_release+0x44/0x70
-   dma_buf_release+0x46/0xa0
-   __dentry_kill+0x10c/0x190
-   dput+0x1c2/0x320
-   __fput+0xe8/0x260
-   ____fput+0xe/0x20
-   task_work_run+0x64/0xa0
-   exit_to_user_mode_prepare+0x15b/0x160
-   syscall_exit_to_user_mode+0x21/0x50
-   do_syscall_64+0x50/0x90
-   entry_SYSCALL_64_after_hwframe+0x61/0xcb
+When resuming from suspend-to-idle, you may see the following error from kernel if using amdgpu,
 
-It is related to AMD FirePro W2100 GPU card and Linux radeon driver. The call trace is
-shown when system/screen is back from sleep or display resolution is changed. No affected
-functionality is observed. This issue is under investigation.
+		[drm:uvd_v3_1_hw_init [amdgpu]] *ERROR* amdgpu: UVD Firmware validate fail (-22).
+		[drm:amdgpu_device_ip_resume_phase2 [amdgpu]] *ERROR* resume of IP block <uvd_v3_1> failed -22
+		amdgpu 0000:02:00.0: amdgpu: amdgpu_device_ip_resume failed (-22).
+
+or the following error, if using radeon driver,
+
+    [drm:r600_ring_test [radeon]] *ERROR* radeon: ring 0 test failed (scratch(0x850C)=0xCAFEDEAD)
+    [drm:si_resume [radeon]] *ERROR* si startup failed on resume
+
+    Call Trace:
+     <TASK>
+     ? show_regs+0x69/0x80
+     ? __warn+0x89/0x160
+     ? radeon_ttm_bo_destroy+0xe4/0xf0 [radeon]
+     ? report_bug+0x171/0x1a0
+     ? handle_bug+0x42/0x80
+     ? exc_invalid_op+0x1c/0x70
+     ? asm_exc_invalid_op+0x1f/0x30
+     ? radeon_ttm_bo_destroy+0xe4/0xf0 [radeon]
+     ? radeon_ttm_bo_destroy+0x58/0xf0 [radeon]
+     ttm_bo_release+0x62/0x2d0 [ttm]
+     ttm_bo_put+0x38/0x60 [ttm]
+     radeon_bo_unref+0x22/0x40 [radeon]
+     radeon_gem_object_free+0x38/0x60 [radeon]
+     drm_gem_object_handle_put_unlocked+0xe1/0xf0
+     drm_gem_handle_delete+0x9d/0xf0
+     ? __pfx_drm_gem_close_ioctl+0x10/0x10
+     drm_gem_close_ioctl+0x36/0x40
+     drm_ioctl_kernel+0xda/0x180
+     drm_ioctl+0x25d/0x4c0
+     ? __pfx_drm_gem_close_ioctl+0x10/0x10
+     radeon_drm_ioctl+0x52/0x90 [radeon]
+     __x64_sys_ioctl+0x9f/0xe0
+     x64_sys_call+0x1b57/0x1c90
+     do_syscall_64+0x41/0x90
+     entry_SYSCALL_64_after_hwframe+0x78/0xe2
+
+it may be related to BIOS that the video card cannot be re-initialized correctly.
 
 2) "nproc --all" may show incorrect number of CPU on the board.
 
