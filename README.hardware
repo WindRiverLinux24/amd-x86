@@ -89,13 +89,17 @@ The following features are not supported and not validated.
 	x ACPI S3 (Suspend to RAM)
 	x AMD Family 17h (Models 00h-0fh) HD Audio Controller [1022:1457]
 
-3.1.4 Note
-~~~~~~~~~~
+3.1.4 Notes
+~~~~~~~~~~~
 
-The serial port console can be used on board is ttyS4 or ttyS5.
+1) The serial port console can be used on board is ttyS4 or ttyS5.
 
   AMDI0020:00: ttyS4 at MMIO 0xfedc9000 (irq = 3, base_baud = 3000000) is a 16550A
   AMDI0020:01: ttyS5 at MMIO 0xfedca000 (irq = 4, base_baud = 3000000) is a 16550A
+
+2) The AMD FirePro W2100 GPU card can be supported by radeon driver or by amdgpu driver.
+The default driver is radeon. To override it, use "radeon.si_support=0 amdgpu.si_support=1"
+in kernel boot cmdline.
 
 3.1.5 Known Issues
 ~~~~~~~~~~~~~~~~~~
