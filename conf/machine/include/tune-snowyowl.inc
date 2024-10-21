@@ -22,3 +22,6 @@ PACKAGE_EXTRA_ARCHS:tune-dbfp5-64 = "${PACKAGE_EXTRA_ARCHS:tune-x86-64} dbfp5-64
 
 QEMU_EXTRAOPTIONS_dbfp5-32 = " -cpu EPYC-v3,check=false"
 QEMU_EXTRAOPTIONS_dbfp5-64 = " -cpu EPYC-v3,check=false"
+
+# Testcase of cve-2015-3290 in ltp doesn't work with AVX, so disable avx when using dbfp5 tune feature.
+TUNE_CCARGS:append:pn-ltp = "${@bb.utils.contains('TUNE_FEATURES', 'dbfp5', ' -mno-avx', '', d)}"
