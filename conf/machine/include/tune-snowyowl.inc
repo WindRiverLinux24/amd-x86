@@ -25,3 +25,6 @@ QEMU_EXTRAOPTIONS_dbfp5-64 = " -cpu EPYC-v3,check=false"
 
 # Testcase of cve-2015-3290 in ltp doesn't work with AVX, so disable avx when using dbfp5 tune feature.
 TUNE_CCARGS:append:pn-ltp = "${@bb.utils.contains('TUNE_FEATURES', 'dbfp5', ' -mno-avx', '', d)}"
+
+# kexec-tools don't work with AVX, so disable it when using dbfp5 tune feature.
+TUNE_CCARGS:append:pn-kexec-tools = "${@bb.utils.contains('TUNE_FEATURES', 'dbfp5', ' -mno-avx -mno-avx2', '', d)}"
