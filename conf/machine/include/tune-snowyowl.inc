@@ -25,6 +25,14 @@ PACKAGE_EXTRA_ARCHS:tune-dbfp5-64 = "${PACKAGE_EXTRA_ARCHS:tune-x86-64} dbfp5-64
 QEMU_EXTRAOPTIONS_dbfp5-32 = " -cpu EPYC-v3,check=false"
 QEMU_EXTRAOPTIONS_dbfp5-64 = " -cpu EPYC-v3,check=false"
 
+# When using AMD Snowy Owl specific tune flags, some packages are
+# not compatible with some instruction sets in 32-bit multilib build.
+TUNE_CCARGS:append:pn-lib32-rocksdb = "${@bb.utils.contains('TUNE_FEATURES', 'dbfp5', ' -mno-avx -mno-avx2 -mno-bmi -mno-bmi2 -mno-pclmul', '', d)}"
+TUNE_CCARGS:append:pn-lib32-grpc = "${@bb.utils.contains('TUNE_FEATURES', 'dbfp5', ' -mno-bmi -mno-bmi2', '', d)}"
+TUNE_CCARGS:append:pn-lib32-python3-grpcio = "${@bb.utils.contains('TUNE_FEATURES', 'dbfp5', ' -mno-bmi -mno-bmi2', '', d)}"
+TUNE_CCARGS:append:pn-lib32-python3-mldtypes = "${@bb.utils.contains('TUNE_FEATURES', 'dbfp5', ' -mno-avx -mno-avx2', '', d)}"
+TUNE_CCARGS:append:pn-lib32-gtk4 = "${@bb.utils.contains('TUNE_FEATURES', 'dbfp5', ' -mno-sse', '', d)}"
+
 # Testcase of cve-2015-3290 in ltp doesn't work with AVX, so disable avx when using dbfp5 tune feature.
 TUNE_CCARGS:append:pn-ltp = "${@bb.utils.contains('TUNE_FEATURES', 'dbfp5', ' -mno-avx', '', d)}"
 
